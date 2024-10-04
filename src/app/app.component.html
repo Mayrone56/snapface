@@ -1,0 +1,22 @@
+<!-- <app-face-snap [faceSnap] = "mySnap" />
+<app-face-snap [faceSnap] = "myOtherSnap" />
+<app-face-snap [faceSnap] = "myLastSnap" /> -->
+
+<!-- <app-face-snap [faceSnap] = "mySnap" *ngIf = "mySnap.snaps >= 5" />
+<app-face-snap [faceSnap] = "myOtherSnap" *ngIf = "myOtherSnap.snaps >= 5" />
+<app-face-snap [faceSnap] = "myLastSnap" *ngIf = "myLastSnap.snaps >= 5" /> -->
+
+<!-- Au lieu d'avoir 3 instances de faceSnap on utilise *ngFor qui permet d'itérer -->
+<!-- <app-face-snap
+  *ngFor="let faceSnapElementInArray of faceSnaps"
+  [faceSnap]="faceSnapElementInArray"
+></app-face-snap> -->
+
+<!-- AppComponent ne contient maintenant que ce qu'il faut pour afficher les elements principaux de l'app -->
+<app-header></app-header>
+<!-- Remplacé par la route -->
+<!-- <app-face-snap-list></app-face-snap-list> -->
+
+<!-- <router-outlet> est un point d'insertion pour les composants correspondant aux routes définies dans ton application. -->
+<!-- Ici, <router-outlet> est la balise qui dit à Angular où injecter dynamiquement le composant en fonction de la route. Le AppHeader restera affiché sur toutes les routes, ce qui est logique pour un en-tête de navigation. -->
+<router-outlet></router-outlet>

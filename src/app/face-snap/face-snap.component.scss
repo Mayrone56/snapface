@@ -1,0 +1,65 @@
+.face-snap-card {
+  box-sizing: border-box;
+  width: 40vw;
+  padding: 10px 30px;
+  box-shadow: lightgray 4px 4px 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  img {
+    height: 250px;
+    width: 400px;
+    // max-width: 300px;
+    // max-height: 200px;
+    background-position: center;
+    background-size: contain;
+  }
+  h2 {
+    margin-bottom: 0;
+  }
+  p {
+    font-weight: 300;
+    font-size: 16px;
+  }
+  button {
+    background-color: transparent;
+    box-sizing: border-box;
+    height: 32px;
+    min-width: 100px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #ee9267;
+    margin: 16px;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ee9267;
+    &:active {
+      transform: translate(1px, 1px);
+      box-shadow: lightgray 0 0 5px;
+    }
+    &:hover {
+      // font-size: 16px;
+      // font-weight: 600;
+      background-color: #ee9267;
+      color: white;
+    }
+  }
+}
+
+.snapped {
+  background-color: rgba(lightgreen, 0.4);
+  color: rgb(27, 0, 100);
+  button {
+    box-shadow: lightgreen 3px 3px 7px;
+    color: darkgreen;
+    &:active {
+      box-shadow: rgb(4, 85, 4) 0 0 5px;
+      color: white;
+    }
+  }
+}

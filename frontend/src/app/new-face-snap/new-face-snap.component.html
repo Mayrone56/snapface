@@ -1,0 +1,93 @@
+<p>new-face-snap works!</p>
+
+<div class="form-card">
+  <h2>Nouveau FaceSnap</h2>
+
+  <!-- Formulaire réactif Angular lié à un objet de type FormGroup -->
+  <!-- Le fait d'importer `ReactiveFormsModule` dans le module Angular permet de créer des formulaires réactifs. -->
+  <!-- L'attribut `[formGroup]="snapForm"` lie le formulaire à une instance de `FormGroup` définie dans le composant TypeScript. -->
+  <!-- [formGroup] : Il s'agit d'une directive utilisée pour lier un formulaire HTML à un FormGroup dans Angular. -->
+  <form [formGroup]="snapForm">
+    <div class="form-group">
+      <label for="title">Titre</label>
+      <!-- Le champ de texte est lié au contrôle de formulaire `title` via `formControlName="title"`. -->
+      <!-- Cela associe l'input au contrôle `title` dans l'objet `FormGroup` appelé `snapForm`. -->
+      <!-- formControlName="title" : Ce champ est lié au contrôle de formulaire nommé title dans le FormGroup -->
+      <!-- Les données saisies par l'utilisateur sont automatiquement gérées par Angular dans le cadre du formulaire réactif. -->
+      <input id="title" type="text" formControlName="title" />
+    </div>
+
+    <!-- Champ pour la description du FaceSnap -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <!-- Le champ de texte est lié au contrôle `description` du `FormGroup`. -->
+      <!-- Ici, on utilise un `textarea` pour permettre une saisie multi-ligne avec `rows="4"`. -->
+      <textarea
+        id="description"
+        type="text"
+        formControlName="description"
+        rows="4"
+      ></textarea>
+    </div>
+
+    <!-- Champ pour l'URL de l'image du FaceSnap -->
+    <div class="form-group">
+      <label for="imageUrl">URL de l'image</label>
+      <!-- L'input pour saisir l'URL de l'image est lié au contrôle `imageUrl` via `formControlName="imageUrl"`. -->
+      <!-- Le contrôle `imageUrl` est géré dans le `FormGroup` du composant TypeScript. -->
+      <input id="imageUrl" type="text" formControlName="imageUrl" />
+    </div>
+
+    <!-- Champ pour saisir le lieu du FaceSnap -->
+    <div class="form-group">
+      <label for="location">Lieu</label>
+      <!-- L'input pour saisir le lieu est lié au contrôle `location` via `formControlName="location"`. -->
+      <!-- Ce champ permet à l'utilisateur d'indiquer un lieu géographique associé à son FaceSnap. -->
+      <input id="location" type="text" formControlName="location" />
+    </div>
+
+    <!-- Bouton pour soumettre le formulaire -->
+    <div class="action-buttons">
+      <!-- Le bouton de soumission ne soumet pas le formulaire par défaut -->
+      <!-- L'événement `(click)` appelle la méthode `onSubmitForm()` dans le composant TypeScript. -->
+      <!-- C'est cette méthode qui va traiter et valider les données du formulaire. -->
+      <button
+        type="submit"
+        (click)="onSubmitForm()"
+        [disabled]="snapForm.invalid"
+      >
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>
+<!-- Permet de creer un alias "as" pour les emissions de l'Observable, on va pouvoir utiliser faceSnap comme variable, comme si on avait un objet de faceSnap static, sauf que la ce sont les emissions de l'Observable, tout le template sera alors mah -->
+<!-- La syntaxe as faceSnap permet de stocker cette valeur sous le nom de faceSnap, utilisable dans le bloc. -->
+<!-- La syntaxe as faceSnap permet de stocker cette valeur sous le nom de faceSnap, utilisable dans le bloc. -->
+<div class="face-snap-card" *ngIf="faceSnapPreview$ | async as faceSnap">
+  <!-- *ngIf : Directive structurelle d'Angular
+       - *ngIf="faceSnapPreview$ | async as faceSnap" vérifie si l'Observable `faceSnapPreview$` a émis une valeur.
+       - Le pipe `async` souscrit automatiquement à l'Observable et fournit la valeur émise.
+       - La valeur récupérée est stockée dans la variable locale `faceSnap` pour être utilisée dans ce bloc de code.
+    -->
+
+  <!-- Le titre du FaceSnap est affiché avec le pipe `uppercase` pour convertir le texte en majuscules. -->
+  <h2>{{ faceSnap.title | uppercase }}</h2>
+
+  <!-- La date de création du FaceSnap est formatée à l'aide du pipe `date`. 
+       Le format "longDate" affiche une date complète (ex: 12 octobre 2024). -->
+  <p>Mise en ligne le {{ faceSnap.createdDate | date : "longDate" }}</p>
+
+  <!-- Affiche l'image du FaceSnap avec `src` lié dynamiquement à `faceSnap.imageUrl` et 
+       `alt` à `faceSnap.title`, ce qui améliore l'accessibilité de l'image. -->
+  <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title" />
+
+  <!-- Description du FaceSnap, avec le pipe `titlecase` pour mettre en majuscule la première lettre de chaque mot. -->
+  <p>{{ faceSnap.description | titlecase }}</p>
+
+  <!-- Vérifie si la location du FaceSnap est "Paris". Si oui, affiche un message indiquant que la photo a été prise à Paris. 
+       Le *ngIf est une condition qui montre cet élément seulement si `faceSnap.location` vaut "Paris". -->
+  <p *ngIf="faceSnap.location === 'Paris'">
+    Photo prise à {{ faceSnap.location }}
+  </p>
+</div>

@@ -1,0 +1,51 @@
+<!-- landing-page.component.html -->
+<div class="landing-block">
+  <!-- Titre de bienvenue sur la page d'accueil -->
+  <h1>Bienvenue sur Snapface !</h1>
+
+  <!-- Description courte de ce qu'offre le site, ici un partage de photos -->
+  <p>
+    Ici vous pourrez partager vos photos -> FaceSnaps perso avec le monde
+    entier.
+  </p>
+
+  <!-- Formulaire pour s'inscrire à la newsletter -->
+  <!-- `ngForm` est une directive Angular qui permet de transformer ce formulaire en un formulaire géré par Angular. -->
+  <!-- Avec la syntaxe `#emailForm="ngForm"`, on crée une référence locale appelée `emailForm`. Cette référence permet d'accéder aux propriétés du formulaire (comme sa validité, ses valeurs, etc.). -->
+  <!-- `(ngSubmit)="onSubmitForm(emailForm)"` : Quand l'utilisateur soumet le formulaire, cela déclenche la méthode `onSubmitForm` du composant TypeScript, en passant la référence `emailForm`. -->
+  <form #emailForm="ngForm" (ngSubmit)="onSubmitForm(emailForm)">
+    <!-- Label pour le champ de saisie de l'email -->
+    <label for="emailInput">Inscrivez-vous à notre newsletter !</label>
+
+    <!-- Champ de saisie de type email -->
+    <!-- `[(ngModel)]="userEmail"` : L'email saisi par l'utilisateur est lié au modèle `userEmail` défini dans le composant TypeScript. -->
+    <!-- Cela permet de mettre à jour dynamiquement `userEmail` quand l'utilisateur modifie le champ d'email dans le formulaire. -->
+    <!-- `name="userEmail"` : Le nom du contrôle (input) dans le formulaire, nécessaire pour que Angular puisse gérer ce champ. -->
+    <input
+      type="email"
+      id="emailInput"
+      [(ngModel)]="userEmail"
+      name="userEmail"
+    />
+
+    <!-- Bouton pour soumettre le formulaire -->
+    <!-- Ce bouton déclenchera l'événement `(ngSubmit)` qui appellera `onSubmitForm`. -->
+    <button type="submit">Souscrire</button>
+  </form>
+
+  <!-- Affichage du logo de Snapface -->
+  <!-- `src="/assets/snapface-logo.svg"` : Chemin relatif vers l'image du logo dans le dossier `assets` de l'application Angular. -->
+  <!-- `alt="Snapface logo"` : Texte alternatif pour l'accessibilité, au cas où l'image ne serait pas affichée. -->
+  <img src="/assets/snapface-logo.svg" alt="Snapface logo" />
+
+  <!-- Section avec des liens ou boutons pour naviguer vers d'autres pages du site -->
+  <div class="landing-links">
+    <!-- Ancienne version du lien : une simple ancre pour rediriger vers une autre page via le `routerLink`. -->
+    <!-- Ce lien permettait de naviguer vers la page /facesnaps -->
+    <!-- <a routerLink="/facesnaps">Continuer vers Snapface</a> -->
+
+    <!-- Nouvelle version : un bouton qui appelle la méthode `onContinue()` définie dans le composant TypeScript pour naviguer vers la page /facesnaps. -->
+    <!-- Ce bouton déclenche la méthode `onContinue` lorsqu'il est cliqué, qui utilise `Router` pour rediriger l'utilisateur. -->
+    <button (click)="onContinue()">Continuer vers Snapface</button>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<main>
+  <p>Je suis single facesnap component</p>
+  <!-- SI on ne met pas le / avant facesnaps il va essayer d'ajouter le mot facesnaps à la route actuelle -->
+  <a class="btBack" [routerLink]="['/facesnaps']">Back</a>
+  <div
+    *ngIf="faceSnap$ | async as faceSnap"
+    class="face-snap-card"
+    [ngClass]="{ snapped: buttonText === 'Unlike !' }"
+  >
+    <h2>{{ faceSnap.title | uppercase }}</h2>
+    <p>Mise en ligne le {{ faceSnap.createdDate | date : "longDate" }}</p>
+    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title" />
+    <p>{{ faceSnap.description | titlecase }}</p>
+
+    <!-- Condition passée pour la location-->
+    <!-- Sans condition test juste si true  -->
+    <!-- <p *ngIf = "faceSnap.location">Photo prise à {{ faceSnap.location }}</p> -->
+    <p *ngIf="faceSnap.location === 'Paris'">
+      Photo prise à {{ faceSnap.location }}
+    </p>
+    <!-- <p>{{ 4346234.36 | number : "1.0-0" }}</p>
+    <p>{{ 4346234.36 | number : "1.0-1" }}</p>
+    <p>{{ 0.336 | percent }}</p>
+    <p>{{ 0.336 | percent : "1.0-1" }}</p>
+    <p>{{ 344.46 | currency }}</p>
+    <p>{{ 344.46 | currency : "EUR" }}</p>
+    <p>{{ 344.46 | currency : "EUR" : "code" }}</p> -->
+    <p>
+      <!-- faceSnap ici est généré avec l'alias en haut -->
+      <button (click)="onLike(faceSnap.id)">{{ buttonText }}</button>
+      🤌
+      <span [ngStyle]="{ color: 'rgb(0, ' + faceSnap.snaps + ', 0)' }">{{
+        faceSnap.snaps
+      }}</span>
+    </p>
+  </div>
+</main>
